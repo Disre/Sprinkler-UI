@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery Mobile: Theme Download</title>
+    <link rel="stylesheet" href="themes/other.css" />
+    <link rel="stylesheet" href="themes/green.min.css" />
+    <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+
+            //hider function in notifications
+            $("#when").hide();
+            $("input[name$='notfreq']").click(function() {
+
+                var radio_value = $(this).val();
+
+                if (radio_value == 'week') {
+                    $("#when").show();
+                } else {
+                    $("#when").hide();
+                }
+            });
+
+            //hider functions in addrules
+            $("#addrulereset").click(function() {
+                $("#rulepick").show();
+                $("#time").hide();
+                $("#water").hide();
+            })
+
+
+            $("input[name$='time']").click(function() {
+                $("#rulepick").hide();
+                $("#time").show();
+            });
+
+            $("input[name$='water']").click(function() {
+                $("#rulepick").hide();
+                $("#water").show();
+            });
+            //makereport
+            $("#madereport").hide();
+            $("#reportreset").click(function() {
+                $("#reportdiv").show();
+                $("#madereport").hide();
+            });
+            $("#makereport").click(function() {
+                $("#reportdiv").hide();
+                $("#madereport").show();
+            });
+
+            //deactivate system
+            $("#flip").click(function() {
+                $("#schedulelist").hide();
+            });
+
+        });
+    </script>
+
+</head>
+
+<body>
+
+
+    <!--login page-->
+    <div id="login" data-role="page" data-theme="a">
+        <div data-role="header" data-position="fixed">
+            <h1>Log In</h1>
+        </div>
+        <div data-role="main" class="ui-content">
+          <h2>Garden Gnome Sprinkler System<h2>
+            <img src="images/gnome.png" width="100%">
+            <form method="post" action="demoform.asp">
+                <div class="ui-field-contain">
+                    <label for="fullname">User Name:</label>
+                    <input type="text" name="fullname" id="fullname">
+                    <label for="bday">Password:</label>
+                    <input type="text" name="password" id="password">
+                </div>
+            </form>
+            <a href="#main" class="button ui-btn ui-corner-all" style="margin:auto;width:20%;">Log In</a>
+        </div>
+    </div>
+
+    <!--main page-->
+    <div id="main" data-role="page" data-theme="a">
+        <div data-role="header" data-position="fixed">
+            <h1>Main</h1>
+            <a href="#settingsPanel" class="ui-btn ui-btn-right ui-icon-bars ui-btn-icon-notext ui-corner-all"></a>
+        </div>
+        <!--yard display-->
+
+        <div data-role="content" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all center">
+            <h3 style="margin:0;padding:10px 0px;">My Yard</h3>
+            <img src="images/google.jpg" style="width:100%;">
+        </div>
+        <!--weather-->
+        <div data-role="content" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all">
+            <iframe id="forecast_embed" type="text/html" frameborder="0" height="200" width="100%" src="http://forecast.io/embed/#lat=41.227778&lon=-111.961111&name=Ogden,Utah"> </iframe>
+        </div>
+
+        <!--preferences pane-->
+        <div data-role="panel" id="settingsPanel" data-display="overlay" data-position="right">
+            <ul data-role="listview">
+                <li data-role="list-divider">Stuffs</li>
+                <li><a href="#layout">Layout</a>
+                </li>
+                <li><a href="#makelayout">Make Layout</a>
+                </li>
+                <li><a href="#notifications">Notifications</a>
+                </li>
+                <li><a href="#rules">Rules</a>
+                </li>
+                <li><a href="#schedule">Schedule</a>
+                </li>
+                <li><a href="#report" id="reportreset">Report</a>
+                </li>
+                <li><a href="#login">Log Out</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!--layout-->
+    <div id="layout" data-role="page" data-theme="a">
+        <div data-role="header" data-position="fixed">
+            <h1>Layout</h1>
+            <a href="#main" class="ui-btn ui-btn-left ui-icon-carat-l ui-btn-icon-notext ui-corner-all"></a>
+            <a href="#addzone" class="ui-btn ui-btn-right ui-icon-plus ui-btn-icon-right ui-corner-all">Add Zone</a>
+        </div>
+        <!--yard display-->
+        <h1 style="text-align:center;">Zones</h1>
+
+        <div data-role="content" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all">
+            <div class="ui-grid-a">
+                <div class="ui-block-a ui-corner-all" style="height:80px; width:49%; margin:10px 1% 0 0; text-align:center; border-width: 1px; border-style:solid; border-color:#7CB342; background: url(images/grass.jpg); background-size:100% 200%; color:white; display:inline-block">Front Yard
+                    <a href="#status" style="margin:auto;width:25%;" class="ui-btn ui-mini ui-icon-info ui-btn-icon-left ui-corner-all">Status</a>
+                </div>
+
+                <div class="ui-block-b ui-corner-all" style="height:80px; width:49%; margin:10px 0 0 1%; text-align:center; border-width: 1px; border-style:solid; border-color:#7CB342; background: url(images/grass.jpg); background-size:100% 200%; color:white;">Back Yard
+                    <a href="#status" style="margin:auto;width:25%;" class="ui-btn ui-mini ui-icon-info ui-btn-icon-left ui-corner-all">Status</a>
+                </div>
+
+                <div class="ui-block-a ui-corner-all" style="height:80px; width:49%; margin:10px 1% 0 0; text-align:center; border-width: 1px; border-style:solid; border-color:#7CB342; background: url(images/garden.jpg); background-size:100% 200%; color:white; display:inline-block">Garden
+                    <a href="#status" style="margin:auto;width:25%;" class="ui-btn ui-mini ui-icon-info ui-btn-icon-left ui-corner-all">Status</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--zonestatus-->
+    <div id="status" data-role="page" data-theme="a">
+        <div data-role="header" data-position="fixed">
+            <h1>Front Yard</h1>
+            <a href="#layout" class="ui-btn ui-btn-left ui-icon-carat-l ui-btn-icon-notext ui-corner-all"></a>
+            <a href="#addplant" class="ui-btn ui-btn-right ui-icon-plus ui-btn-icon-right ui-corner-all">Add Plant</a>
+        </div>
+        <div data-role="content" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all center">
+            <img src="images/sprinklerplant.jpg">
+        </div>
+
+        <div data-role="content" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all center">
+            <div data-role="content" id="schedulelist" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all center">
+                <ul data-role="listview" data-inset="true">
+                    <li data-role="list-divider">Monday</li>
+                    <li>2:00AM-2:30AM</li>
+                    <li data-role="list-divider">Tuesday</li>
+                    <li>2:00AM-2:30AM</li>
+                    <li data-role="list-divider">Thursday</li>
+                    <li>2:00AM-2:30AM</li>
+                    <li data-role="list-divider">Friday</li>
+                    <li>2:00AM-2:30AM</li>
+                    <li data-role="list-divider">Saturday</li>
+                    <li>2:00AM-2:30AM</li>
+                    <li data-role="list-divider">Sunday</li>
+                    <li>2:00AM-2:30AM</li>
+                </ul>
+            </div>
+        </div>
+
+        <div data-role="content" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all center">
+            <ul data-role="listview">
+                <li data-role="list-divider">Details</li>
+                <li>This Zone has 5 spouts</li>
+                <li>This Zone gets rain</li>
+            </ul>
+        </div>
+
+        <div data-role="content" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all center">
+            <ul data-role="listview">
+                <li data-role="list-divider">Plants</li>
+                <li><a href="#plant">Rose</a>
+                </li>
+                <li><a href="#plant">Tomatoes</a>
+                </li>
+                <li><a href="#plant">Potatoes</a>
+                </li>
+                <li><a href="#plant">Tulips</a>
+                </li>
+                <li><a href="#plant">Oak Tree</a>
+                </li>
+                <li><a href="#plant">Pine Tree</a>
+                </li>
+            </ul>
+        </div>
+        <a href="#layout" class="ui-btn ui-mini ui-corner-all" style="margin:auto;width:30%;">Remove Zone</a>
+
+    </div>
+
+    <!--notifications-->
+    <div id="notifications" data-role="page" data-theme="a">
+        <div data-role="header" data-position="fixed">
+            <h1>Notifications</h1>
+            <a href="#main" class="ui-btn ui-btn-left ui-icon-carat-l ui-btn-icon-notext ui-corner-all"></a>
+            <a href="#notpopup" data-rel="popup" class="ui-btn ui-btn-right ui-icon-gear  ui-corner-all">Edit</a>
+        </div>
+        <div data-role="content" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all center">
+            <p><strong>Wednesday:</strong>You need to prune yor roses
+                <p>
+                    <p><strong>Thursday:</strong> Garden Gnomes on strike</p>
+                    <p><strong>Friday:</strong> Garden Gnomes ate all your plants</p>
+                    <p><strong>Saturday:</strong> Moisture Sensor failure detected</p>
+                    <p><strong>Sunday:</strong> Garden Gnomes are getting violent</p>
+                    <p><strong>Monday:</strong> User was taken hostage by Garden Gnomes</p>
+        </div>
+
+        <!--editnotifications popup-->
+        <div data-role="popup" id="notpopup" data-overlay-theme="a" data-theme="a">
+            <form method="post" action="demoform.asp">
+                <fieldset data-role="controlgroup">
+                    <legend>Which notifications would you like to receive:</legend>
+                    <label for="pn">Plant needs</label>
+                    <input type="checkbox" id="pn">
+                    <label for="hf">Hardware failures</label>
+                    <input type="checkbox" id="hf">
+                    <label for="gga">Garden gnome activity</label>
+                    <input type="checkbox" id="gga">
+                </fieldset>
+
+
+
+
+                <fieldset data-role="controlgroup">
+                    <legend>How often would you like notifications:</legend>
+                    <label for="never">Never</label>
+                    <input type="radio" name="notfreq" id="never" value="never">
+                    <label for="daily">Daily</label>
+                    <input type="radio" name="notfreq" id="daily" value="day">
+                    <label for="weekly">Weekly</label>
+                    <input type="radio" name="notfreq" id="weekly" value="week">
+                </fieldset>
+
+
+                <div id="when">
+                    <fieldset data-role="controlgroup">
+                        <legend>What day would you like notifications on:</legend>
+                        <label for="mon">Monday</label>
+                        <input type="radio" name="day" id="mon">
+                        <label for="tue">Tuesday</label>
+                        <input type="radio" name="day" id="tue">
+                        <label for="wed">Wednesday</label>
+                        <input type="radio" name="day" id="wed">
+                        <label for="thu">Thursday</label>
+                        <input type="radio" name="day" id="thu">
+                        <label for="fri">Friday</label>
+                        <input type="radio" name="day" id="fri">
+                        <label for="sat">Saturday</label>
+                        <input type="radio" name="day" id="sat">
+                        <label for="sun">Sunday</label>
+                        <input type="radio" name="day" id="sun">
+                    </fieldset>
+                </div>
+
+
+            </form>
+            <div style="text-align:center;">
+                <a href="#notifications" class="ui-btn ui-mini ui-btn-inline ui-corner-all" style="width:14%">Save</a>
+                <a href="#notifications" class="ui-btn ui-mini ui-btn-inline ui-corner-all" style="width:14%">Cancel</a>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+    <!--rules-->
+    <div id="rules" data-role="page" data-theme="a">
+        <div data-role="header" data-position="fixed">
+            <h1>Rules</h1>
+            <a href="#main" class="ui-btn ui-btn-left ui-icon-carat-l ui-btn-icon-notext ui-corner-all"></a>
+            <a href="#addrule" id="addrulereset" class="ui-btn ui-btn-right ui-icon-plus ui-btn-icon-notext ui-corner-all"></a>
+        </div>
+        <div data-role="content" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all center">
+            <h2 style="text-align:center;margin:0;">Current Rules</h2>
+            <div data-role="collapsible" data-theme="a" data-content-theme="a" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-inset="false" data-iconpos="right">
+                <h2>Rule one</h2>
+                <ul data-role="listview">
+                    <li>Type: Water Restriction</li>
+                    <li>Amount: 6500 Gallons per week</li>
+                    <li data-icon="delete"><a href="#">Delete Rule</a>
+                    </li>
+                </ul>
+            </div>
+            <div data-role="collapsible" data-theme="a" data-content-theme="a" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-inset="false" data-iconpos="right">
+                <h2>rule 2</h2>
+                <ul data-role="listview">
+                    <li>Type: Time Restriction</a>
+                    </li>
+                    <li>Time: 2:00 AM to 4:30 AM</li>
+                    <li data-icon="delete"><a href="#">Delete Rule</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!--addrule-->
+    <div id="addrule" data-role="page" data-theme="a">
+        <div data-role="header" data-position="fixed">
+            <h1>Rules</h1>
+            <a href="#rules" class="ui-btn ui-btn-left ui-icon-carat-l ui-btn-icon-notext ui-corner-all"></a>
+        </div>
+
+        <div id="rulepick" data-role="content" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all center">
+            <h4>What type of rule do you want to make?</h4>
+            <input type="button" name="time" value="Time Restriction">
+            <input type="button" name="water" value="Water Restriction">
+        </div>
+
+        <div id="time" data-role="content" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all center">
+            <h4>Rule name:</h4>
+            <input type="text">
+            <h4>What times are watering allowed?</h4>
+            <input type="time">
+            <div style="text-align:center;">
+                <h3 style="margin:0;">- to -</h3>
+            </div>
+
+            <input type="time">
+
+
+
+            <div style="text-align:center;">
+                <a href="#rules" class="ui-btn ui-mini ui-btn-inline ui-corner-all" style="width:14%">Save</a>
+                <a href="#rules" class="ui-btn ui-mini ui-btn-inline ui-corner-all" style="width:14%">Cancel</a>
+            </div>
+        </div>
+
+        <div id="water" data-role="content" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all center">
+            <h4>Rule name:</h4>
+            <input type="text">
+            <h4>How much water are you allowed to use?</h4>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <input type="text">
+                </div>
+                <div class="ui-block-b">
+
+                    <select name="impmet" id="impmet">
+                        <option value="imperial">Gallons</option>
+                        <option value="metric">Liters</option>
+                    </select>
+
+                </div>
+                <div style="text-align:center;">
+                    <h3 style="margin:0;">- per -</h3>
+                </div>
+                <div class="ui-block-b" style="text-align:center">
+
+                    <select name="ruledur" id="ruledur">
+                        <option value="day">Day</option>
+                        <option value="week">Week</option>
+                        <option value="month">Month</option>
+                    </select>
+
+                </div>
+            </div>
+            <div style="text-align:center;">
+                <a href="#rules" class="ui-btn ui-mini ui-btn-inline ui-corner-all" style="width:14%">Save</a>
+                <a href="#rules" class="ui-btn ui-mini ui-btn-inline ui-corner-all" style="width:14%">Cancel</a>
+            </div>
+        </div>
+    </div>
+
+    <!--report-->
+    <div id="report" data-role="page" data-theme="a">
+        <div data-role="header" data-position="fixed">
+            <h1>Report</h1>
+            <a href="#main" class="ui-btn ui-btn-left ui-icon-carat-l ui-btn-icon-notext ui-corner-all"></a>
+        </div>
+        <div id="reportdiv" data-role="content" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all center">
+            <h2>Report Period</h2>
+            <!--<input type="text" value="6/1/15">-->
+            <input type="date" name="bday">
+            <p>- to -</p>
+            <!--<input type="text" value="7/1/15">-->
+            <input type="date" name="bday">
+            <div style="text-align:center;">
+                <a href="#getreport" id="makereport" class="ui-btn ui-mini ui-btn-inline ui-corner-all">Make Report</a>
+            </div>
+        </div>
+
+        <div id="madereport" data-role="content" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all center">
+        </div>
+
+    </div>
+
+    <!--getreport-->
+    <div id="getreport" data-role="page" data-theme="a">
+        <div data-role="header" data-position="fixed">
+            <h1>Report</h1>
+            <a href="#main" class="ui-btn ui-btn-left ui-icon-carat-l ui-btn-icon-notext ui-corner-all"></a>
+        </div>
+        <div data-role="content" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all center">
+            <img src="images/report.png" width="100%">
+        </div>
+
+    </div>
+
+
+
+    <!--addplant-->
+    <div id="addplant" data-role="page" data-theme="a">
+        <div data-role="header" data-position="fixed">
+            <h1>Add Plant</h1>
+            <a href="#status" class="ui-btn ui-btn-left ui-icon-carat-l ui-btn-icon-notext ui-corner-all"></a>
+        </div>
+
+        <div id="" data-role="content" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all center">
+            <h3> Enter Plant name:</h3>
+            <input type="text" />
+            <a href="#" class="ui-btn ui-mini ui-corner-all" style="margin:auto;width:30%;">Check Plant</a>
+        </div>
+
+        <div id="" data-role="content" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all center">
+            <h3>Enter Plant location:</h3>
+            <img src="images/plant.jpg">
+        </div>
+        <div style="text-align:center;">
+            <a href="#status" class="ui-btn ui-mini ui-btn-inline ui-corner-all" style="width:14%">Save</a>
+            <a href="#status" class="ui-btn ui-mini ui-btn-inline ui-corner-all" style="width:14%">Cancel</a>
+        </div>
+    </div>
+
+    <!--plant-->
+    <div id="plant" data-role="page" data-theme="a">
+        <div data-role="header" data-position="fixed">
+            <h1>Rose</h1>
+            <a href="#status" class="ui-btn ui-btn-left ui-icon-carat-l ui-btn-icon-notext ui-corner-all"></a>
+        </div>
+        <div data-role="content" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all center">
+            <img src="images/plant.jpg">
+        </div>
+
+
+        <div data-role="content" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all center">
+            <ul data-role="listview">
+                <li data-role="list-divider">Plant Needs</li>
+                <li>Thoroughly soak plant at least twice weekly</li>
+                <li>Use Mulch</li>
+                <li>Prune</li>
+                <li>add fertilizer</li>
+            </ul>
+        </div>
+
+
+        <a href="#status" class="ui-btn ui-mini ui-corner-all" style="margin:auto;width:30%;">Remove plant</a>
+
+    </div>
+
+    <!--addzone-->
+    <div id="addzone" data-role="page" data-theme="a">
+        <div data-role="header" data-position="fixed">
+            <h1>Add Zone</h1>
+            <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-icon-carat-l ui-btn-icon-notext ui-corner-all"></a>
+        </div>
+
+        <div data-role="content" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all">
+            <h3>Draw the boundaries of the Zone and place sprinklers:</h3>
+            <img src="images/sprinkler.jpg">
+            <div>
+                <a href="#" class="ui-btn ui-icon-edit ui-btn-inline ui-btn-icon-notext ui-corner-all"></a>
+                <a href="#" class="ui-btn ui-icon-navigation ui-btn-icon-left ui-mini ui-btn-inline ui-corner-all">Sprinkler</a>
+            </div>
+        </div>
+
+        <div data-role="content" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all center">
+            <label for="rain">Does this Zone get rain?</label>
+            <input type="checkbox" id="rain">
+        </div>
+
+        <div style="text-align:center;">
+            <a href="#status" class="ui-btn ui-mini ui-btn-inline ui-corner-all" style="width:14%">Save</a>
+            <a href="#status" class="ui-btn ui-mini ui-btn-inline ui-corner-all" style="width:14%">Cancel</a>
+        </div>
+    </div>
+
+    <!--create layout-->
+    <div id="makelayout" data-role="page" data-theme="a">
+        <div data-role="header" data-position="fixed">
+            <h1>Create Layout</h1>
+            <a href="#main" class="ui-btn ui-btn-left ui-icon-carat-l ui-btn-icon-notext ui-corner-all"></a>
+        </div>
+
+        <div data-role="content" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all">
+            <h3>Find your home on google earth to take a snapshot then draw the boundaries:</h3>
+            <img src="images/google.jpg">
+            <div>
+                <a href="#" class="ui-btn ui-icon-edit ui-btn-inline ui-btn-icon-notext ui-corner-all"></a>
+            </div>
+        </div>
+
+
+        <div style="text-align:center;">
+            <a href="#main" class="ui-btn ui-mini ui-btn-inline ui-corner-all" style="width:14%">Save</a>
+            <a href="#main" class="ui-btn ui-mini ui-btn-inline ui-corner-all" style="width:14%">Cancel</a>
+        </div>
+    </div>
+
+    <!--schedule-->
+    <div id="schedule" data-role="page" data-theme="a">
+        <div data-role="header" data-position="fixed">
+            <h1>Schedule</h1>
+            <a href="#main" class="ui-btn ui-btn-left ui-icon-carat-l ui-btn-icon-notext ui-corner-all"></a>
+            <a href="#adjustschedule" class="ui-btn ui-btn-right ui-icon-edit ui-corner-all">Adjust Schedule</a>
+        </div>
+        <div data-role="content" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all">
+            <fieldset>
+                <div data-role="fieldcontain" style="text-align:center;padding:0;">
+                    <label for="checkbox-based-flipswitch">
+                        <h3>Deactivate System:</h3>
+                    </label>
+                    <input type="checkbox" data-role="flipswitch" name="flip" id="flip" checked="">
+                </div>
+            </fieldset>
+        </div>
+        <div data-role="content" id="schedulelist" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all center">
+            <ul data-role="listview" data-inset="true">
+                <li data-role="list-divider">Monday</li>
+                <li>Front Yard: 2:00AM-2:30AM</li>
+                <li>Back Yard: 2:30AM-3:00AM</li>
+                <li data-role="list-divider">Tuesday</li>
+                <li>Front Yard: 2:00AM-2:30AM</li>
+                <li>Back Yard: 2:30AM-3:00AM</li>
+                <li>Garden: 3:00AM-3:30AM</li>
+                <li data-role="list-divider">Wednesday</li>
+                <li>Garden Gnomes are taking the day off</li>
+                <li data-role="list-divider">Thursday</li>
+                <li>Front Yard: 2:00AM-2:30AM</li>
+                <li>Back Yard: 2:30AM-3:00AM</li>
+                <li>Garden: 3:00AM-3:30AM</li>
+                <li data-role="list-divider">Friday</li>
+                <li>Front Yard: 2:00AM-2:30AM</li>
+                <li>Back Yard: 2:30AM-3:00AM</li>
+                <li data-role="list-divider">Saturday</li>
+                <li>Front Yard: 2:00AM-2:30AM</li>
+                <li>Back Yard: 2:30AM-3:00AM</li>
+                <li>Garden: 3:00AM-3:30AM</li>
+                <li data-role="list-divider">Sunday</li>
+                <li>Front Yard: 2:00AM-2:30AM</li>
+                <li>Back Yard: 2:30AM-3:00AM</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!--schedule-->
+    <div id="adjustschedule" data-role="page" data-theme="a">
+        <div data-role="header" data-position="fixed">
+            <h1>Adjust Schedule</h1>
+            <a href="#main" class="ui-btn ui-btn-left ui-icon-carat-l ui-btn-icon-notext ui-corner-all"></a>
+        </div>
+        <div data-role="content" style="margin:4%;background-color:#C5E1A5" class="ui-corner-all">
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <h3>Adjustment Type:</h3>
+
+                </div>
+
+                <div class="ui-block-b">
+                    <fieldset class="ui-field-contain">
+                        <label for="day"></label>
+                        <select name="day" id="day">
+                            <option value="wed">Disable System</option>
+                            <option value="mon">Enable System</option>
+                            <option value="tue">Adjust Water Output</option>
+                        </select>
+                    </fieldset>
+                </div>
+
+                <div class="ui-block-a">
+                    <h3>Which Zone:</h3>
+
+                </div>
+
+                <div class="ui-block-b">
+                    <fieldset class="ui-field-contain">
+                        <label for="day"></label>
+                        <select name="day" id="day">
+                            <option value="wed">All</option>
+                            <option value="mon">Front Yard</option>
+                            <option value="tue">Back Yard</option>
+                            <option value="wed">Garden</option>
+                        </select>
+                    </fieldset>
+                </div>
+                <div class="ui-block-a">
+                    <h3>How long:</h3>
+                </div>
+
+                <div class="ui-block-b">
+                    <input type="time">
+                    <div style="text-align:center;">
+                        <h3 style="margin:0;">- to -</h3>
+                    </div>
+
+                    <input type="time">
+                </div>
+                <div class="ui-block-a">
+                    <h3>Output Percent:</h3>
+                </div>
+
+                <div class="ui-block-b">
+                    <fieldset class="ui-field-contain">
+                        <label for="day"></label>
+                        <select name="day" id="day">
+                            <option value="wed">-50%</option>
+                            <option value="mon">-40%</option>
+                            <option value="tue">-30%</option>
+                            <option value="wed">-20%</option>
+                            <option value="wed">-10%</option>
+                            <option value="mon">0%</option>
+                            <option value="tue">10%</option>
+                            <option value="wed">20%</option>
+                            <option value="wed">30%</option>
+                            <option value="mon">40%</option>
+                            <option value="tue">50%</option>
+                            <option value="wed">Let the gnomes decide</option>
+                        </select>
+                    </fieldset>
+                </div>
+                <div style="text-align:center;">
+                    <a href="#schedule" class="ui-btn ui-mini ui-btn-inline ui-corner-all" style="width:14%">Save</a>
+                    <a href="#schedule" class="ui-btn ui-mini ui-btn-inline ui-corner-all" style="width:14%">Cancel</a>
+                </div>
+            </div>
+
+
+        </div>
+</body>
+
+</html>
